@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Выживание — Тренажёр Инвокера</title>
+  <meta name="description" content="Браузерный тренажёр Инвокера: режим выживания, случайные спеллы, сбор и каст на скорость.">
+  <link rel="icon" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <img class="mini" src="assets/quas.webp" alt="">
+          <img class="mini" src="assets/wex.webp" alt="">
+          <img class="mini" src="assets/exort.webp" alt="">
+        </span>
+        <span class="brand-name">Invoker</span>
+        <span class="brand-mode">Выживание</span>
+      </div>
+      <button type="button" id="mute" class="ghost-btn" aria-pressed="false">Звук</button>
+    </header>
+
+    <main class="layout">
+      <aside class="panel spells">
+        <h2>Заклинания</h2>
+        <ol id="spell-list" class="spell-list"></ol>
+      </aside>
+
+      <section class="panel stage" id="stage">
+        <div class="board-top">
+          <div class="timer-wrap">
+            <div class="timer" id="timer">
+              <div class="timer-fill" id="timer-fill"></div>
+            </div>
+            <span id="timer-readout">2.0</span>
+          </div>
+          <div class="live-score">
+            <span id="live-score">0</span>
+            <small>спеллов</small>
+          </div>
+        </div>
+
+        <div id="gate" class="gate">
+          <h2 id="gate-title">Выживание</h2>
+          <p id="gate-text"></p>
+          <div id="result" class="result" hidden>
+            <div><b id="r-score">0</b><span>спеллов</span></div>
+            <div><b id="r-time">0:00</b><span>время</span></div>
+            <div><b id="r-miss">0</b><span>ошибок</span></div>
+          </div>
+          <p id="record-note" class="record-note" hidden>Новый рекорд</p>
+          <button type="button" id="start-btn" class="btn-gold">Начать</button>
+        </div>
+
+        <div id="play" class="play" hidden>
+          <div class="target">
+            <div id="target-icon" class="ability ability-lg"></div>
+            <div class="target-copy">
+              <div id="task-pill" class="task-pill"></div>
+              <h2 id="spell-title"></h2>
+              <p id="task-help"></p>
+              <div id="target-recipe" class="recipe recipe-lg"></div>
+            </div>
+          </div>
+          <p id="feedback" class="feedback" aria-live="polite"></p>
+        </div>
+
+        <div class="queue-block">
+          <div class="queue-head">
+            <span>Очередь сфер</span>
+            <span id="queue-spell" class="queue-spell">Пусто</span>
+          </div>
+          <div id="queue" class="queue"></div>
+        </div>
+
+        <div class="pads">
+          <button type="button" class="pad" data-key="Q">
+            <span class="pad-label">Quas</span>
+            <span class="orb"><img src="assets/quas.webp" alt=""></span>
+          </button>
+          <button type="button" class="pad" data-key="W">
+            <span class="pad-label">Wex</span>
+            <span class="orb"><img src="assets/wex.webp" alt=""></span>
+          </button>
+          <button type="button" class="pad" data-key="E">
+            <span class="pad-label">Exort</span>
+            <span class="orb"><img src="assets/exort.webp" alt=""></span>
+          </button>
+          <button type="button" class="pad" data-key="R">
+            <span class="pad-label">Invoke</span>
+            <span class="keycap invoke-face"><img src="assets/invoke.webp" alt=""></span>
+          </button>
+          <button type="button" class="pad is-idle" data-key="D" id="cast-pad">
+            <span class="pad-label">Применить</span>
+            <span class="keycap cast-face" id="cast-face">D</span>
+          </button>
+        </div>
+        <p class="hint">Q W E — сферы, R — Invoke, D — применить. Считается физическая клавиша, раскладка не важна.</p>
+        <div id="countdown" class="count-badge" hidden>3</div>
+      </section>
+
+      <aside class="panel side">
+        <h2>Забег</h2>
+        <dl class="stats">
+          <div><dt>Счёт</dt><dd id="stat-score">0</dd></div>
+          <div><dt>Рекорд</dt><dd id="stat-best">0</dd></div>
+          <div><dt>Время</dt><dd id="stat-time">0:00</dd></div>
+          <div><dt>Ошибки</dt><dd id="stat-miss">0</dd></div>
+          <div><dt>Задание</dt><dd id="stat-task">—</dd></div>
+        </dl>
+        <div class="rules">
+          <h3>Правила</h3>
+          <ul>
+            <li>На спелл есть <span id="spell-seconds">2</span> секунды. Полоска уходит сама.</li>
+            <li>Верная связка заполняет полоску целиком.</li>
+            <li>Неверный спелл снимает 0,5 секунды.</li>
+            <li>Случайно выпадает только сбор или сбор и каст.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+  <p class="legal">Неофициальный фанатский тренажёр. Dota 2, Invoker и изображения способностей принадлежат Valve Corporation.</p>
+  <script src="js/game.js"></script>
+</body>
+</html>
