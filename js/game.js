@@ -4,7 +4,7 @@
 // Each spell is either invoke (orbs + R) or invoke and cast (orbs + R + D).
 
 const SPELL_MS = 2000;
-const PENALTY_MS = 500;
+const PENALTY_MS = 200;
 const BEST_KEY = "invoker-survival-best";
 const MUTE_KEY = "invoker-survival-muted";
 
@@ -431,7 +431,7 @@ function render() {
     document.getElementById("record-note").hidden = !state.isNewRecord;
   } else {
     document.getElementById("gate-title").textContent = "Выживание";
-    document.getElementById("gate-text").textContent = "Полоска уходит сама. Верный спелл заполняет её целиком. Неверный снимает 0,5 секунды. Задание каждый раз случайное: только Invoke или Invoke и каст на D.";
+    document.getElementById("gate-text").textContent = "Полоска уходит сама. Верный спелл заполняет её целиком. Неверный снимает 0,2 секунды. Задание каждый раз случайное: только Invoke или Invoke и каст на D.";
     document.getElementById("start-btn").textContent = "Начать";
     document.getElementById("result").hidden = true;
     document.getElementById("record-note").hidden = true;
